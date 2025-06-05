@@ -1,0 +1,60 @@
+<!--
+ * This file is licensed under Attribution-NonCommercial-NoDerivatives 4.0 International
+ * Made by CrazyH2
+ * https://github.com/crazyh2
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <title>Google</title>
+
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: end;
+        }
+
+        img {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+    <img src="page.png" draggable="false">
+    <script>
+        const randomPhotoUrl = "https://cataas.com/cat";
+
+        setTimeout(
+            () => alert("Make sure that opening popups is set to always allowed\nJust minimize this tab or switch to a different tab. :D\nMade By CrazyH2 (github.com/crazyh2)"),
+            500
+        );
+
+        function getRandomArbitrary(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function spawnRandomWindow() {
+            var randomWidth = getRandomArbitrary(250, 700);
+            var randomHeight = getRandomArbitrary(250, 700);
+
+            var randomTop = getRandomArbitrary(0, 1000);
+            var randomLeft = getRandomArbitrary(0, 1000);
+
+            window.open(
+                randomPhotoUrl,
+                "Windows Copilot Advert - " + getRandomArbitrary(100000, 999999),
+                `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${randomWidth},height=${randomHeight},left=${randomLeft},top=${randomTop}`
+            );
+        };
+
+        setInterval(spawnRandomWindow, 650);
+    </script>
+</body>
+</html>
