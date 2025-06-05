@@ -31,10 +31,12 @@
     <script>
         const randomPhotoUrl = "https://cataas.com/cat";
 
-        setTimeout(
-            () => alert("Make sure that opening popups is set to always allowed\nJust minimize this tab or switch to a different tab. :D\nMade By CrazyH2 (github.com/crazyh2)"),
-            500
-        );
+        if ( location.search !== "?alert=0" ) {
+            setTimeout(
+                () => alert("Make sure that opening popups is set to always allowed\nJust minimize this tab or switch to a different tab. :D\nMade By CrazyH2 (github.com/crazyh2)"),
+                500
+            );
+        };
 
         function getRandomArbitrary(min, max) {
             return Math.random() * (max - min) + min;
