@@ -32,16 +32,31 @@
         /*
             ?alert=0    Disables alerts
             ?thread=?   Dupes tab by amount you specify
+            ?black=1    Shows black rather than google image
         */
         
         const randomPhotoUrl = "https://cataas.com/cat";
 
-        if ( location.search == "" ) {
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) == variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            console.log('Query variable %s not found', variable);
+        }
+
+        if ( getQueryVariable("alert") !== "0" ) {
             setTimeout(
                 () => alert("Make sure that opening popups is set to always allowed\nJust minimize this tab or switch to a different tab. :D\nMade By CrazyH2 (github.com/crazyh2)"),
                 500
             );
-        } else if ( location.search == "?thread=1" ) {
+        };
+        
+        if ( getQueryVariable("thread") == "1" ) {
             setTimeout(
                 () => {
                     var amount = prompt("How many threads?\nMade By CrazyH2 (github.com/crazyh2)");
@@ -51,6 +66,11 @@
                 },
                 500
             );
+        };
+        
+        if ( getQueryVariable("black") == "1" ) {
+            document.querySelector("body > img").style.display = "none";
+            document.querySelector("body").style.background = "#000";
         };
 
         function getRandomArbitrary(min, max) {
