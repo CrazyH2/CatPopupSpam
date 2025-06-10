@@ -29,11 +29,26 @@
 <body oncontextmenu="return false;">
     <img src="page.png" draggable="false">
     <script>
+        /*
+            ?alert=0    Disables alerts
+            ?thread=?   Dupes tab by amount you specify
+        */
+        
         const randomPhotoUrl = "https://cataas.com/cat";
 
-        if ( location.search !== "?alert=0" ) {
+        if ( location.search == "" ) {
             setTimeout(
                 () => alert("Make sure that opening popups is set to always allowed\nJust minimize this tab or switch to a different tab. :D\nMade By CrazyH2 (github.com/crazyh2)"),
+                500
+            );
+        } else if ( location.search == "?thread=1" ) {
+            setTimeout(
+                () => {
+                    var amount = prompt("How many threads?\nMade By CrazyH2 (github.com/crazyh2)");
+                    for (let i = 0; i < amount; i++) {
+                        window.open(`${ location.origin }${ location.pathname }?alert=0`, '_blank');
+                    };
+                },
                 500
             );
         };
