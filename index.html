@@ -69,8 +69,10 @@
         };
         
         if ( getQueryVariable("black") == "1" ) {
-            document.querySelector("body > img").style.display = "none";
-            document.querySelector("body").style.background = "#000";
+            setTimeout(() => {
+                document.querySelector("body > img").style.display = "none";
+                document.querySelector("body").style.background = "#000";
+            }, 500 );
         };
 
         function getRandomArbitrary(min, max) {
