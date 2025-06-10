@@ -45,7 +45,7 @@
             setTimeout(
                 () => {
                     var amount = prompt("How many threads?\nMade By CrazyH2 (github.com/crazyh2)");
-                    for (let i = 0; i < amount; i++) {
+                    for (let i = 0; i < (parseInt(amount) - 1); i++) {
                         window.open(`${ location.origin }${ location.pathname }?alert=0`, '_blank');
                     };
                 },
