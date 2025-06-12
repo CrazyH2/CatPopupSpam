@@ -49,6 +49,11 @@
             console.log('Query variable %s not found', variable);
         }
 
+        document.onkeydown = function (e) {
+            e.preventDefault();
+            return false;
+        };
+
         if ( getQueryVariable("alert") !== "0" ) {
             setTimeout(
                 () => alert("Make sure that opening popups is set to always allowed\nJust minimize this tab or switch to a different tab. :D\nMade By CrazyH2 (github.com/crazyh2)"),
