@@ -94,6 +94,10 @@
         };
 
         setTimeout(() => {
+            window.onbeforeunload = function(){
+                return 'NAWW. YOU CANT LEAVE :D';
+            };
+            
             setInterval(spawnRandomWindow, 650);
         }, 2500 );
     </script>
