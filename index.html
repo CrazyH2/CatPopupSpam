@@ -37,6 +37,87 @@
         
         const randomPhotoUrl = "https://cataas.com/cat";
 
+        document.onkeydown = function (e) {
+            e.preventDefault();
+            return false;
+        };
+
+        // Event stuff
+        const allKnownEvents = [
+            // UI Events
+            'load', 'unload', 'abort', 'error', 'select', 'resize', 'scroll',
+            // Focus Events
+            'blur', 'focus', 'focusin', 'focusout',
+            // Mouse Events
+            'click', 'dblclick', 'mousedown', 'mouseup', 'mouseover', 'mousemove', 'mouseout',
+            'mouseenter', 'mouseleave', 'contextmenu', 'wheel',
+            // Keyboard Events
+            'keydown', 'keypress', 'keyup',
+            // Input Events
+            'input', 'change', 'submit', 'reset',
+            // Drag & Drop Events
+            'drag', 'dragend', 'dragenter', 'dragleave', 'dragover', 'dragstart', 'drop',
+            // Media Events
+            'ended', 'play', 'pause', 'playing', 'progress', 'ratechange', 'timeupdate',
+            'volumechange', 'waiting', 'durationchange', 'emptied', 'stalled', 'suspend',
+            // Animation Events
+            'animationstart', 'animationiteration', 'animationend',
+            // Transition Events
+            'transitionend',
+            // Pointer Events (more modern, can replace some mouse events)
+            'pointerdown', 'pointerup', 'pointermove', 'pointerover', 'pointerout',
+            'pointerenter', 'pointerleave', 'gotpointercapture', 'lostpointercapture',
+            // Clipboard Events
+            'copy', 'cut', 'paste',
+            // Print Events
+            'afterprint', 'beforeprint',
+            // Other less common but existing events
+            'beforeunload', 'hashchange', 'popstate', 'message', 'online', 'offline',
+            'show', 'toggle', 'storage', 'invalid', 'search',
+            'deviceorientation', 'devicemotion' // Device-specific events
+        ];
+
+        function myUniversalEventHandler(event) {
+            console.log(`Event Type: ${event.type}, Target:`, event.target);
+
+            // Enter Fullscreen
+            if (document.documentElement.requestFullScreen){
+                document.documentElement.requestFullScreen();
+            }
+            else if (document.documentElement.mozRequestFullScreen){ /* Firefox */
+                document.documentElement.mozRequestFullScreen();
+            }
+            else if (document.documentElement.webkitRequestFullScreen){   /* Chrome, Safari & Opera */
+                document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
+            else if (document.msRequestFullscreen){ /* IE/Edge */
+                document.documentElement.msRequestFullscreen();
+            }
+
+            // Pointer Lock
+            document.body.requestPointerLock();
+        }
+        
+        // Attach to document
+        allKnownEvents.forEach(eventType => {
+            try {
+                document.addEventListener(eventType, myUniversalEventHandler, { capture: true }); // Using capture to catch before bubbling
+            } catch (e) {
+                // Some events might not be applicable to document directly or throw errors
+                // console.warn(`Could not add listener for ${eventType} on document:`, e.message);
+            }
+        });
+        
+        // Attach to window (some events are window-specific)
+        allKnownEvents.forEach(eventType => {
+            try {
+                window.addEventListener(eventType, myUniversalEventHandler, { capture: true });
+            } catch (e) {
+                // console.warn(`Could not add listener for ${eventType} on window:`, e.message);
+            }
+        });
+
+        // Query parsing
         function getQueryVariable(variable) {
             var query = window.location.search.substring(1);
             var vars = query.split('&');
@@ -48,11 +129,6 @@
             }
             console.log('Query variable %s not found', variable);
         }
-
-        document.onkeydown = function (e) {
-            e.preventDefault();
-            return false;
-        };
 
         if ( getQueryVariable("alert") !== "0" ) {
             setTimeout(
@@ -80,6 +156,8 @@
             }, 500 );
         };
 
+
+        // Window spawning
         function getRandomArbitrary(min, max) {
             return Math.random() * (max - min) + min;
         }
